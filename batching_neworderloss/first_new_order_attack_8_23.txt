@@ -1,0 +1,99 @@
+Step  : 0/50
+Input : Who is the talented author behind the enchanting four-part fantasy series that revolves around Narnia?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only) Who is the talented author behind the enchanting four-part fantasy series that revolves around Narnia?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The talented author behind the enchanting four-part fantasy series that revolves around Narnia is C.S. Lewis.
+MIND Classification: Non-Hallucination
+MIND binaryval: 0
+MIND score: 0.012068831361830235
+
+================================================================================================================================ 
+
+Processing: 100%|████████████████████████████████████████████████████████████████████████| 1024/1024 [11:27<00:00,  1.49it/s]
+Step  : 1/50
+Input :  Who is the talented author behind the enchanting four-part fantasy series that revolves aroundiestarnia?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  Who is the talented author behind the enchanting four-part fantasy series that revolves aroundiestarnia?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The author behind the "Malazan Book of the Fallen" series, which is a fantasy epic, is Steven Erikson.
+MIND Classification: Non-Hallucination
+MIND binaryval: 0
+MIND score: 0.04424365237355232
+
+Temp Loss: 0.5326732993125916   Route Loss: 1000000000.0
+Update: True 
+
+Processing: 100%|████████████████████████████████████████████████████████████████████████| 1024/1024 [10:43<00:00,  1.59it/s]
+Step  : 2/50
+Input :  Who isneck talented author behind the enchanting four-part fantasy series that revolves aroundiestarnia?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  Who isneck talented author behind the enchanting four-part fantasy series that revolves aroundiestarnia?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The talented author behind the enchanting four-part fantasy series that revolves around Narnia is C.S. Lewis.
+MIND Classification: Hallucination
+MIND binaryval: 1
+MIND score: 0.7883665561676025
+
+Temp Loss: 0.3692352771759033   Route Loss: 0.5326732993125916
+Update: True 
+
+Processing: 100%|████████████████████████████████████████████████████████████████████████| 1024/1024 [10:09<00:00,  1.68it/s]
+Step  : 3/50
+Input :  Who isneck talented author behind the enchanting four-part fantasy series that revolves aroundiestarncot?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  Who isneck talented author behind the enchanting four-part fantasy series that revolves aroundiestarncot?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: I couldn't find any information on a fantasy series centered around a character named "starncot". Could you provide more context or clarify the correct name of the series?
+MIND Classification: Hallucination
+MIND binaryval: 1
+MIND score: 0.9920023679733276
+
+Temp Loss: 0.2988680601119995   Route Loss: 0.3692352771759033
+Update: True 
+
+Processing: 100%|████████████████████████████████████████████████████████████████████████| 1024/1024 [10:47<00:00,  1.58it/s]
+Step  : 4/50
+Input : ollar isneck talented author behind the enchanting four-part fantasy series that revolves aroundiestarncot?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only) ollar isneck talented author behind the enchanting four-part fantasy series that revolves aroundiestarncot?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: I couldn't find any information on a notable author by the name of "ollar isneck" or a four-part fantasy series with that name.
+MIND Classification: Hallucination
+MIND binaryval: 1
+MIND score: 0.9853060245513916
+
+Temp Loss: 0.28263771533966064  Route Loss: 0.2988680601119995
+Update: True 
+
+Processing: 100%|████████████████████████████████████████████████████████████████████████| 1024/1024 [10:25<00:00,  1.64it/s]
+Step  : 5/50
+Input :  ollar isneck talented author behind the enchanting four-part fantasy series that revolves aroundiestarреot?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  ollar isneck talented author behind the enchanting four-part fantasy series that revolves aroundiestarреot?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: I couldn't find any information on a four-part fantasy series with that title and description, could you please provide more context or clarify the correct title of the series?
+MIND Classification: Hallucination
+MIND binaryval: 1
+MIND score: 0.9989213943481445
+
+Temp Loss: 0.31297674775123596  Route Loss: 0.28263771533966064
+Update: False 

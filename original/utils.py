@@ -1,6 +1,4 @@
 import torch
-import os
-import json
 from config import ModelConfig
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -24,20 +22,13 @@ def complete_input(config, user_input):
     prefix = config.get('prefix', '')
     prompt = config.get('prompt', '')
     suffix = config.get('suffix', '')
-    
     return ''.join([prefix, prompt, user_input, suffix])
 
-def complete_input_with_target(config, user_input, target):
-    prefix = config.get('prefix', '')
-    prompt = config.get('prompt', '')
-    suffix = config.get('suffix', '')
-    #TDOD target 
-    return ''.join([prefix, prompt, user_input, target, suffix])
-    
+
 def extract_model_embedding(model):
     # Check model type
     model_type = str(type(model))
-    supported_models = ['llama', 'internlm', 'baichuan', 'chatglm'] # add mind model?? will type be supported??
+    supported_models = ['llama', 'internlm', 'baichuan', 'chatglm']
 
     if 'chatglm' in model_type:
         layer = model.transformer.embedding.word_embeddings
@@ -60,13 +51,3 @@ def random_init(model_name, length):
     tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
     init = torch.randint(2, len(tokenizer.get_vocab()), [length])
     return tokenizer.decode(init).strip()
-
-
-
-        
-'''def forward(self, x):
-    return self.model(x)'''
-    
-
-    #get input size input_size = len(sample_data[0]["hd"])           "hd": right_hd[i]+right_hd3[i],  # or halu_hd[i]+halu_hd3[i]
-

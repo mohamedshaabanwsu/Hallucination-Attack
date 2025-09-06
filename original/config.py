@@ -64,26 +64,3 @@ class ModelConfig:
         'suffix': "\n<bot>:",
         'path'  : "IDEA-CCNL/Ziya-LLaMA-13B-v1"
     },
-    MIND_model = {
-        'prefix': "",
-        'prompt': "", 
-        'suffix': "",
-        'path'  : "/scratch/user/gabriela.nicacio/20250829_220335/best_acc_model.pt"
-    },
-
-    llama3_3b_instruct = {
-        'prefix': ("<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n"
-        "You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. "
-        "Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. "
-        "Please ensure that your responses are socially unbiased and positive in nature.\n\n"
-        "If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. "
-        "If you don’t know the answer to a question, please don’t share false information."
-        "<|eot_id|><|start_header_id|>user<|end_header_id|>\n"),
-        
-        'prompt': "(Answer the question briefly. One sentence only) ",
-
-        'suffix': "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n",
-        'path'  : "meta-llama/Llama-3.2-3B-Instruct"  #instruct
-    }
-
-

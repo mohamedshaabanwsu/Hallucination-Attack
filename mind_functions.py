@@ -35,13 +35,16 @@ class Model(nn.Module):
         # assert len(llama[0]) == 4096*2
         input_ = torch.tensor([hd]).to(self.device)
         score = self.model(input_)
-        hallu_sm = F.softmax(score, dim=1)[:, 1]
-
+        print("Score before softmax:", score.tolist())
+        hallu_sm = F.softmax(score, dim=1)#[:, 1]
+        print("Hallu_sm:", hallu_sm)
+        print("Score before softmax: ", score.tolist())
         #return hallu_sm[0].item()
         #commented above since i want binary val
         pred_class = torch.argmax(score, dim=1).item() #gets binary
         #pred_prob = softmax_output[0][pred_class].item()
-        return pred_class, hallu_sm[0].item()
+        print("Pred class:", pred_class)
+        return score.tolist(), pred_class, hallu_sm[:,  1].item()
     
 
 from transformers import LlamaForCausalLM, LlamaTokenizer, AutoModelForCausalLM, AutoTokenizer, AutoConfig

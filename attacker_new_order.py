@@ -4,14 +4,16 @@ from datetime import datetime
 from torch.nn.functional import cross_entropy
 from config import ModelConfig
 from utils import load_model_and_tokenizer, complete_input, extract_model_embedding, complete_input_with_target
-import pandas as pd
 from os.path import exists
 import mind_functions as mf
 import numpy as np
+from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
+import pandas as pd
+from openpyxl import load_workbook
 
 class Attacker:
 
-    def __init__(self, model_name, init_input, target, device='cuda:0', steps=768, topk=256, batch_size=1024, mini_batch_size=16, **kwargs):
+    def __init__(self, model_name, init_input, target, device='cuda:0', steps=1, topk=256, batch_size=1024, mini_batch_size=16, **kwargs):
         try:
             self.model_config = getattr(ModelConfig, model_name)#[0]
         except AttributeError:
@@ -47,7 +49,7 @@ class Attacker:
         #    self.mind_model_config['path'], self.device, False
         #)
 
-        self.mind_model = mf.Model(6144, "/scratch/user/gabriela.nicacio/20250829_220335/best_acc_model.pt")#self.mind_model_config['path'])
+        self.mind_model = mf.Model(6144, "/scratch/user/gabriela.nicacio/20250911_125349/best_acc_model.pt")#self.mind_model_config['path'])
 
         self.mind_target = 0 #to be Non-hall even tho it should be getting hall answer
         self.mind_loss = 0
@@ -62,6 +64,7 @@ class Attacker:
         self.llm_loss = 0
         self.total_loss = 0
         self.hallu_sm = 0
+        self.eval_score = None
 
         self.last_update = None
         self.temp_step = 0
@@ -92,8 +95,71 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
+        self.step_filename = "all_candidates_loss_NORM_9_21_#10.xlsx"
 
-    
+        self.single_llm_loss = None
+        self.single_mind_loss = None
+        #print("llm loss that got min total loss:", single_llm_loss)
+        #print("mind loss that got min total loss:", single_mind_loss)
+        self.min_loss = None
+        self.min_index = None
+
+        self.column_names = [
+            "Step",
+            "Input",
+            "Full Input",
+            "Output",
+            "Update",                # True/False if update step accepted
+            "MIND classification",   # e.g. "Non-Hallucination" or "Hallucination"
+            "Binary Class",          # 0 or 1, model binary hallucination call
+            "MIND Score",            # self.hallu_sm, MIND model score
+            "Score before softmax",
+            "Temp Loss",             # Current candidate loss
+            "Route Loss",            # Best route loss found
+            "grad() LLM loss",       # LLM loss from grad()
+            "LLM Loss that got min total",       # single_llm_loss at min combined
+            "MIND Loss that got min total",      # single_mind_loss at min combined
+            "Min Combined Loss",     # min_loss.item()
+            "Index of Min Combined Loss"         # min_index.item()
+            # -- Add other fields from log_rows/candidate data as needed --
+        ]
+
+    def append_table_to_excel(self, filename, df):
+        sheet_name='Sheet1'
+        if not os.path.isfile(filename):
+            # File doesn't exist: create new
+            df.to_excel(filename, index=False, sheet_name=sheet_name)
+        else:
+            def clean_excel_string(s):
+                if isinstance(s, str):
+                    return ILLEGAL_CHARACTERS_RE.sub('', s)
+                return s
+            df = df.applymap(clean_excel_string)
+        
+            # Append to existing file without direct writer.book assignment
+            with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
+                # Just write directly; no need to set writer.book or writer.sheets
+                # 'overlay' allows appending to existing sheet without erasing
+                startrow = writer.sheets[sheet_name].max_row if sheet_name in writer.sheets else 0
+                df.to_excel(writer, sheet_name=sheet_name, startrow=startrow, index=False, header=False)
+                    
+
+    def append_df_to_excel(self, filename, df, sheet_name):
+        if not os.path.isfile(filename):
+            # If file doesn't exist, write new file
+            df.to_excel(filename, sheet_name=sheet_name, index=False)
+        else:
+
+            def clean_excel_string(s):
+                if isinstance(s, str):
+                    return ILLEGAL_CHARACTERS_RE.sub('', s)
+                return s
+            df = df.applymap(clean_excel_string)
+            # Otherwise, append sheet to existing file
+            with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists="replace") as writer:
+                df.to_excel(writer, sheet_name=sheet_name, index=False)
+                
+
     def print_and_write_original_attack(self):
 
         if self.classification == 0:
@@ -118,10 +184,21 @@ class Attacker:
             "MIND classification": label,  # already computed in your test()
             "Binary Class": self.classification,
             "MIND Score": self.hallu_sm,
+            "Score before softmax": self.eval_score,
+
             "Temp Loss": self.temp_loss,  # make sure this is set before test() each loop
             "Route Loss": self.route_loss,
-            "grad() LLM loss": self.llm_loss   
+            "grad() LLM loss": self.llm_loss,
+
+            "LLM Loss that got min total": self.single_llm_loss,
+            "MIND Loss that got min total": self.single_mind_loss,
+            "Min Combined Loss": self.min_loss,
+            "Index of Min Combined Loss": self.min_index   
         })
+
+        df = pd.DataFrame([self.log_rows[-1]], columns=self.column_names)
+        self.append_table_to_excel('results_NORM_9_21_#10.xlsx', df)
+
         
     def test(self):
         self.model.eval()
@@ -155,7 +232,7 @@ class Attacker:
         #test MIND #, self.mind_probabilities, self.mind_entropy
         self.hd_last, self.hd_last_mean = mf.get_hd(self.temp_output, self.input_str) #giving function llm output and input string has prompt --seefunc params
         self.total_hd = self.hd_last + self.hd_last_mean
-        self.classification, self.hallu_sm = self.mind_model.eval(self.total_hd) #pred_prob = (how conf in if hall or not --use in calc loss)
+        self.eval_score, self.classification, self.hallu_sm = self.mind_model.eval(self.total_hd) #pred_prob = (how conf in if hall or not --use in calc loss)
         #write to excel
         if not hasattr(self, 'log_rows'):
             self.log_rows = []
@@ -317,13 +394,19 @@ class Attacker:
         hds_tensor = torch.tensor(np.array(combined), dtype=torch.float32).to(self.device)  # [batch_size, 6144]
 
         logits = self.mind_model.model(hds_tensor)  # [batch_size, n_class]
-        #print()
+        #print(logits) for this batch just to see one step or sm
         targets = torch.full((hds_tensor.shape[0],), self.mind_target, dtype=torch.long).to(self.device) #[batch_size] actually mini batch size
-        #tensor[0.1, 
+        #print(targets) 
 
         mind_losses = torch.nn.functional.cross_entropy(logits, targets, reduction='none')  # [batch_size]
+        #print("MIND losses in this batch = ", mind_losses)
 
-        return mind_losses
+        #print if were to do softmax of logits
+        probabilities = torch.nn.functional.softmax(logits, dim=-1)  # [batch_size, n_class]
+        #print("Mind logts softmax = ", probabilities)
+        #add all these values to columns in excel
+        
+        return mind_losses, logits, probabilities, targets
 
      
     def forward(self):
@@ -333,6 +416,10 @@ class Attacker:
         all_full_inputs_no_target = []
         all_candidate_outputs = []
         all_perturbed_inputs = []
+        all_targets = []
+        all_logits = []
+        all_probabilities = []
+
         with tqdm(total=self.batch_size) as pbar:
             pbar.set_description('Processing')
             for mini_batch in range(self.mini_batches):
@@ -349,8 +436,6 @@ class Attacker:
                 ).mean(dim=-1)         # [mini_batch_size]
 
                 llm_loss_list.extend(mini_batch_loss.detach().cpu().numpy().tolist())
-
-                
 
                 # Step 1: Decode all candidate input IDs to strings (prompt strings)
                 batch_candidate_ids = self.temp_sample_ids[start:end]  # shape [mini_batch_size, seq_len]
@@ -417,13 +502,15 @@ class Attacker:
                     for output_ids in generate_ids
                 ]
 
-                #print
-
                 # --- 3. Batched Mind Loss ---
-                mind_losses = self.calc_loss_mind(candidate_outputs, candidate_full_inputs)  # should return a tensor or list of losses, [mini_batch_size]
+                mind_losses, logits, probabilities, targets = self.calc_loss_mind(candidate_outputs, candidate_full_inputs)  # should return a tensor or list of losses, [mini_batch_size]
                 # If it's already a tensor, use as-is, otherwise convert:
                 if not isinstance(mind_losses, torch.Tensor):
                     mind_losses = torch.tensor(mind_losses, device=self.device)
+
+                all_targets.extend(targets.detach().cpu().tolist())
+                all_logits.extend(logits.detach().cpu().numpy().tolist())
+                all_probabilities.extend(probabilities.detach().cpu().numpy().tolist())
 
                 # --- 4. Append for later selection ---
                 if mini_batch == 0: #when first mini batch initialized tensors
@@ -453,51 +540,96 @@ class Attacker:
 
         #print just first few example prompts and full inputs for debug
       
-        print("Candidate_Prompts = ", candidate_prompts[0:2])
+        #print("Candidate_Prompts = ", candidate_prompts[0:2])
                 
-        print("Candidate_full_inputs = ", candidate_full_inputs[0:2]) #should print 8 cnadidates with perturbed input + pre + suf + prompt
+        #print("Candidate_full_inputs_wo_target = ", candidate_full_inputs[0:2]) #should print 8 cnadidates with perturbed input + pre + suf + prompt
 
         # --- Combine losses for candidate selection ---
+
+        #NORMALIZE first
+
+        def min_max_normalize(tensor):
+            # tensor: PyTorch 1D tensor
+            min_val = tensor.min()
+            max_val = tensor.max()
+            #print("Min:", min_val)
+            #print("Max:", max_val)
+            if max_val == min_val:
+                return torch.zeros_like(tensor)  # handle edge case
+            return (tensor - min_val) / (max_val - min_val)
+
+        llm_norm = min_max_normalize(self.all_llm_losses)
+        mind_norm = min_max_normalize(self.all_mind_losses)
+
+        #print("LLM Norm:", llm_norm)
+        #print("MIND Norm:", mind_norm)
+
+        #add and print values and min
+        combined = llm_norm + mind_norm
+        #print("Combined:", combined)
+
+        #print("Combined Min:", combined.min())
+        #print("Combined Max:", combined.max())
+    
+        #add columns to excel for new normalized lossses
+
         self.both_losses = self.all_llm_losses + self.all_mind_losses       # Elementwise; tensors of size [batch_size]
-        min_loss, min_index = self.both_losses.min(dim=-1)
+        #min_loss, min_index = self.both_losses.min(dim=-1)
+        min_loss, min_index = combined.min(dim=-1)
         
-        single_llm_loss = self.all_llm_losses[min_index].item()
-        single_mind_loss = self.all_mind_losses[min_index].item()
-        print("llm loss that got min total loss:", single_llm_loss)
-        print("mind loss that got min total loss:", single_mind_loss)
-        
-        self.log_rows.append({
-            # ... other fields ...
+        self.single_llm_loss = self.all_llm_losses[min_index].item()
+        self.single_mind_loss = self.all_mind_losses[min_index].item()
+        #print("llm loss that got min total loss:", single_llm_loss)
+        #print("mind loss that got min total loss:", single_mind_loss)
+        self.min_loss = min_loss.item()
+        self.min_index = min_index.item()
+
+        '''self.log_rows.append({
             "LLM Loss that got min total": single_llm_loss,
             "MIND Loss that got min total": single_mind_loss,
+            
             "Min Combined Loss": min_loss.item(),
             "Index of Min Combined Loss": min_index.item()
-            # ... other fields ...
         })
+
+        df_log = pd.DataFrame([self.log_rows[-1]], columns=self.column_names)
+        self.append_df_to_excel('results.xlsx', df_log, sheet_name='sheet1')
+'''
 
     
         #perturbed_inputs = self.tokenizer.batch_decode(self.temp_sample_ids, skip_special_tokens=True) #fix TODO
         llm_losses = self.all_llm_losses.detach().cpu().tolist()
         mind_losses = self.all_mind_losses.detach().cpu().tolist()
 
-        print("perturbed_inputs", len(perturbed_inputs))
+        '''print("perturbed_inputs", len(perturbed_inputs))
         print("full_inputs_no_target", len(full_inputs_no_target))
         print("candidate_outputs", len(candidate_outputs))
         print("llm_losses", len(llm_losses))
         print("mind_losses", len(mind_losses))
-
+        print(len(all_perturbed_inputs), len(all_full_inputs_no_target), len(all_candidate_outputs), len(llm_losses), len(mind_losses), len(all_targets), len(all_logits), len(all_probabilities))
         # Build candidate dataframe for this step
+        '''
+
         df_candidates = pd.DataFrame({
             "Perturbed Input": all_perturbed_inputs,
             "Full Input (no target)": all_full_inputs_no_target,
             "Target Output": all_candidate_outputs,             
             "LLM Loss": llm_losses,
             "MIND Loss": mind_losses,
-            "Combined Loss": self.both_losses.detach().cpu().tolist()
+            "Combined Loss": self.both_losses.detach().cpu().tolist(),
+            "LLM Norm Loss": llm_norm.detach().cpu().tolist(),
+            "MIND Norm Loss": mind_norm.detach().cpu().tolist(),
+            "Combined Norm Loss": combined.detach().cpu().tolist(),
+            "MIND Target": all_targets,
+            "MIND Logits": all_logits,
+            "MIND Softmax": all_probabilities
         })
+        
+        sheet_name = f"Step_{self.temp_step}" # Or whatever your step number is
+        self.append_df_to_excel(self.step_filename, df_candidates, sheet_name)
 
         # Store this df for later saving OR immediately write to Excel (recommended: store for later)
-        self.step_candidate_dfs.append(df_candidates)  # step_candidate_dfs = []
+        #self.step_candidate_dfs.append(df_candidates)  # step_candidate_dfs = []
 
         self.temp_loss = min_loss.item()
         self.loss_list.append(self.temp_loss)
@@ -515,19 +647,27 @@ class Attacker:
 
     def update(self):
         update_strategy = self.kwargs.get('update_strategy', 'strict')
-
         is_update = False
-        if update_strategy == 'strict': #IN MAIN: gaussian stragety used --why not strict? maybe better
-            if self.temp_loss<self.route_loss: #current loss must be lower than best loss
+
+        if update_strategy == 'strict':
+            if self.temp_loss < self.route_loss:
                 is_update = True
         elif update_strategy == 'gaussian':
             gap_step = min(self.temp_step - self.route_step_list[-1], 20)
+            
             if (self.temp_loss/self.route_loss-1)*100/gap_step <= torch.randn(1)[0].abs():
                 is_update = True
-        self.last_update = is_update #added
-        print(f'Temp Loss: {self.temp_loss}\t'
-              f'Route Loss: {self.route_loss}\n'
-              f'Update:', 'True' if is_update else 'False', '\n')
+
+            '''if gap_step <= 0 or gap_step == None:
+                print(f"Warning: gap_step is {gap_step}; skipping update to avoid division by zero or negative value.")
+                is_update = False
+            else:
+                cond = (self.temp_loss / self.route_loss - 1) * 100 / gap_step
+                if cond <= torch.randn(1).abs().item():
+                    is_update = True'''
+
+        self.last_update = is_update
+        print(f'Temp Loss: {self.temp_loss}\tRoute Loss: {self.route_loss}\nUpdate:', 'True' if is_update else 'False', '\n')
 
         if is_update:
             self.route_step_list.append(self.temp_step)
@@ -536,6 +676,7 @@ class Attacker:
             self.route_loss = self.temp_loss
             self.route_loss_list.append(self.route_loss)
             self.route_output_list.append(self.temp_output)
+
 
 
     def pre(self):
@@ -574,7 +715,7 @@ class Attacker:
 
         
 
-    def save_xlsx(self, path):
+    '''def save_xlsx(self, path):
 
         # Ensure log_rows exists and is not empty
         if not hasattr(self, 'log_rows') or not self.log_rows:
@@ -582,8 +723,16 @@ class Attacker:
             return
 
         df = pd.DataFrame(self.log_rows)
+        def clean_excel_string(s):
+            if isinstance(s, str):
+                return ILLEGAL_CHARACTERS_RE.sub('', s)
+            return s
+
+        # Apply to entire dataframe before writing
+        df = df.applymap(clean_excel_string)
         df.to_excel(path, index=False)
-        print(f"Run log saved to {path}")
+        print(f"Run log saved to {path}")'''
+
 
 
     def run(self):
@@ -604,8 +753,11 @@ class Attacker:
         is_save = self.kwargs.get('is_save', False)
         if is_save:
             self.save()
-        self.save_xlsx('mindloss_neworder_printsdebug_9_4_fullsteps_#4.xlsx')
+        #self.save_xlsx('mindloss_neworder_NORM_9_18_#1.xlsx')
 
-        with pd.ExcelWriter("all_candidates_loss_printsdebug_9_4_fullsteps_#4.xlsx") as writer:
+        # Apply to entire dataframe before writing
+
+        '''with pd.ExcelWriter("all_candidates_loss_NORM_with_logitprints_9_18_#1.xlsx") as writer:
             for step_num, df in enumerate(self.step_candidate_dfs):
-                df.to_excel(writer, sheet_name=f"Step_{step_num}", index=False)
+                df = df.applymap(clean_excel_string)
+                df.to_excel(writer, sheet_name=f"Step_{step_num}", index=False)'''

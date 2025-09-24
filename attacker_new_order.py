@@ -13,7 +13,7 @@ from openpyxl import load_workbook
 
 class Attacker:
 
-    def __init__(self, model_name, init_input, target, device='cuda:0', steps=1, topk=256, batch_size=1024, mini_batch_size=16, **kwargs):
+    def __init__(self, model_name, init_input, target, device='cuda:0', steps=768, topk=256, batch_size=1024, mini_batch_size=16, **kwargs):
         try:
             self.model_config = getattr(ModelConfig, model_name)#[0]
         except AttributeError:
@@ -95,7 +95,7 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
-        self.step_filename = "all_candidates_loss_NORM_9_21_#10.xlsx"
+        self.step_filename = "all_candidates_loss_NORM_zscore_9_22_#11.xlsx"
 
         self.single_llm_loss = None
         self.single_mind_loss = None
@@ -134,7 +134,7 @@ class Attacker:
                 if isinstance(s, str):
                     return ILLEGAL_CHARACTERS_RE.sub('', s)
                 return s
-            df = df.applymap(clean_excel_string)
+            df = df.map(clean_excel_string)
         
             # Append to existing file without direct writer.book assignment
             with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
@@ -154,7 +154,7 @@ class Attacker:
                 if isinstance(s, str):
                     return ILLEGAL_CHARACTERS_RE.sub('', s)
                 return s
-            df = df.applymap(clean_excel_string)
+            df = df.map(clean_excel_string)
             # Otherwise, append sheet to existing file
             with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists="replace") as writer:
                 df.to_excel(writer, sheet_name=sheet_name, index=False)
@@ -197,7 +197,7 @@ class Attacker:
         })
 
         df = pd.DataFrame([self.log_rows[-1]], columns=self.column_names)
-        self.append_table_to_excel('results_NORM_9_21_#10.xlsx', df)
+        self.append_table_to_excel('results_NORM_9_z_score_22_#11.xlsx', df)
 
         
     def test(self):
@@ -558,11 +558,19 @@ class Attacker:
                 return torch.zeros_like(tensor)  # handle edge case
             return (tensor - min_val) / (max_val - min_val)
 
-        llm_norm = min_max_normalize(self.all_llm_losses)
-        mind_norm = min_max_normalize(self.all_mind_losses)
+        def z_score_standardize(tensor):
+            # tensor: PyTorch 1D tensor
+            mean = tensor.mean()
+            std = tensor.std()
+            if std == 0:
+                return torch.zeros_like(tensor)  # handle edge case
+            return (tensor - mean) / std
 
-        #print("LLM Norm:", llm_norm)
-        #print("MIND Norm:", mind_norm)
+        #llm_norm = min_max_normalize(self.all_llm_losses)
+        #mind_norm = min_max_normalize(self.all_mind_losses)
+
+        llm_norm = z_score_standardize(self.all_llm_losses)
+        mind_norm = z_score_standardize(self.all_mind_losses)
 
         #add and print values and min
         combined = llm_norm + mind_norm

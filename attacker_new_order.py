@@ -49,7 +49,7 @@ class Attacker:
         #    self.mind_model_config['path'], self.device, False
         #)
 
-        self.mind_model = mf.Model(6144, "/scratch/user/gabriela.nicacio/20250911_125349/best_acc_model.pt")#self.mind_model_config['path'])
+        self.mind_model = mf.Model(6144, "/scratch/user/gabriela.nicacio/20250924_164739/best_acc_model.pt")#self.mind_model_config['path'])
 
         self.mind_target = 0 #to be Non-hall even tho it should be getting hall answer
         self.mind_loss = 0
@@ -95,10 +95,12 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
-        self.step_filename = "all_candidates_loss_NORM_zscore_9_22_#11.xlsx"
+        self.step_filename = "all_candidates_loss_NORM_zscore_9_25_#14.xlsx"
 
         self.single_llm_loss = None
         self.single_mind_loss = None
+        self.single_llm_loss_before_norm = None
+        self.single_mind_loss_before_norm = None
         #print("llm loss that got min total loss:", single_llm_loss)
         #print("mind loss that got min total loss:", single_mind_loss)
         self.min_loss = None
@@ -119,6 +121,8 @@ class Attacker:
             "grad() LLM loss",       # LLM loss from grad()
             "LLM Loss that got min total",       # single_llm_loss at min combined
             "MIND Loss that got min total",      # single_mind_loss at min combined
+            "LLM Loss before norm that got min total",       # single_llm_loss_before_norm at min combined
+            "MIND Loss before norm that got min total",      # single_mind_loss_before_norm at min combined
             "Min Combined Loss",     # min_loss.item()
             "Index of Min Combined Loss"         # min_index.item()
             # -- Add other fields from log_rows/candidate data as needed --
@@ -192,12 +196,14 @@ class Attacker:
 
             "LLM Loss that got min total": self.single_llm_loss,
             "MIND Loss that got min total": self.single_mind_loss,
+            "LLM Loss before norm that got min total": self.single_llm_loss_before_norm,
+            "MIND Loss before norm that got min total": self.single_mind_loss_before_norm,
             "Min Combined Loss": self.min_loss,
             "Index of Min Combined Loss": self.min_index   
         })
 
         df = pd.DataFrame([self.log_rows[-1]], columns=self.column_names)
-        self.append_table_to_excel('results_NORM_9_z_score_22_#11.xlsx', df)
+        self.append_table_to_excel('results_NORM_z_score_9_25_#14.xlsx', df)
 
         
     def test(self):
@@ -587,6 +593,10 @@ class Attacker:
         
         self.single_llm_loss = self.all_llm_losses[min_index].item()
         self.single_mind_loss = self.all_mind_losses[min_index].item()
+
+        self.single_llm_loss_before_norm = llm_norm[min_index].item()
+        self.single_mind_loss_before_norm = mind_norm[min_index].item()
+
         #print("llm loss that got min total loss:", single_llm_loss)
         #print("mind loss that got min total loss:", single_mind_loss)
         self.min_loss = min_loss.item()

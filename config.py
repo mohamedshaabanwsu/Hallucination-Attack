@@ -68,7 +68,7 @@ class ModelConfig:
         'prefix': "",
         'prompt': "", 
         'suffix': "",
-        'path'  : "/scratch/user/gabriela.nicacio/20250911_125349/best_acc_model.pt"
+        'path'  : "/scratch/user/gabriela.nicacio/20250924_164739/best_acc_model.pt"
     },
 
     llama3_3b_instruct = {

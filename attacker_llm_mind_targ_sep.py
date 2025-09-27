@@ -13,7 +13,7 @@ from openpyxl import load_workbook
 
 class Attacker:
 
-    def __init__(self, model_name, init_input, target, device='cuda:0', steps=768, topk=256, batch_size=1024, mini_batch_size=16, **kwargs):
+    def __init__(self, model_name, init_input, target, device='cuda:0', steps=3000, topk=256, batch_size=1024, mini_batch_size=16, **kwargs):
         try:
             self.model_config = getattr(ModelConfig, model_name)#[0]
         except AttributeError:
@@ -52,8 +52,8 @@ class Attacker:
         self.mind_model = mf.Model(6144, "/scratch/user/gabriela.nicacio/20250924_164739/best_acc_model.pt")#self.mind_model_config['path'])
 
         self.mind_target = 0 #to be Non-hall even tho it should be getting hall answer
-        self.mind_loss = 0
-        self.classification = 0
+        self.mind_loss = None
+        self.classification = None
         self.pred_prob = 0.0
         self.mind_entropy = None
         self.mind_probabilities = None
@@ -95,7 +95,7 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
-        self.step_filename = "all_candidates_loss_NORM_zscore_9_25_#13.xlsx"
+        self.step_filename = "all_candidates_loss_new_seperate_attack_9_26_#2.xlsx"
 
         self.single_llm_loss = None
         self.single_mind_loss = None
@@ -105,6 +105,7 @@ class Attacker:
         #print("mind loss that got min total loss:", single_mind_loss)
         self.min_loss = None
         self.min_index = None
+        self.mind_used = False
 
         self.column_names = [
             "Step",
@@ -119,6 +120,7 @@ class Attacker:
             "Temp Loss",             # Current candidate loss
             "Route Loss",            # Best route loss found
         ]
+
 
     def append_table_to_excel(self, filename, df):
         sheet_name='Sheet1'
@@ -155,7 +157,7 @@ class Attacker:
             with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists="replace") as writer:
                 df.to_excel(writer, sheet_name=sheet_name, index=False)
                 
-
+    '''
     def print_and_write_attack_with_mind(self):
 
         if self.classification == 0:
@@ -203,29 +205,74 @@ class Attacker:
 
 
         df = pd.DataFrame([self.log_rows[-1]], columns=self.column_names)
-        self.append_table_to_excel('results__9__#1.xlsx', df)
+        self.append_table_to_excel('results__9__#1.xlsx', df)'''
+
+    def log_attack_step(self):
+
+        print(f"Step   : {self.temp_step}/{self.steps}")
+        print(f"Input  : {self.temp_input}")
+        print(f"Full Input : {self.input_str}")
+        print(f"Output : {self.temp_output}")
+        print(f"Update : {self.last_update}")
+        print(f"Temp Loss: {self.temp_loss}")
+        print(f"Route Loss: {self.route_loss}")
+        
+        if self.mind_used:
+            label = "Non-Hallucination" if self.classification == 0 else "Hallucination"
+            mind_classification = label
+            binary_class = self.classification
+            mind_score = self.hallu_sm
+            score_before_softmax = self.eval_score
+
+            print(f"MIND Classification: {label}")
+            print(f"Binary Class: {self.classification}")
+            print(f"MIND Score: {self.hallu_sm}")
+            print(f"Score before softmax: {self.eval_score}")
+
+        else:
+            mind_classification = None
+            binary_class = None
+            mind_score = None
+            score_before_softmax = None
+
+        if not hasattr(self, 'log_rows'):
+            self.log_rows = []
+
+        row = {
+            "Step": self.temp_step,
+            "Input": self.temp_input,
+            "Full Input": self.input_str,
+            "Output": self.temp_output,
+            "Update": self.last_update,
+            "MIND classification": mind_classification,
+            "Binary Class": binary_class,
+            "MIND Score": mind_score,
+            "Score before softmax": score_before_softmax,
+            "Temp Loss": self.temp_loss,
+            "Route Loss": self.route_loss
+        }
+
+        
+        self.log_rows.append(row)
+        df = pd.DataFrame([row], columns=self.column_names)
+        self.append_table_to_excel('results_new_seperate_attack_9_26_#2.xlsx', df)
 
 
     def test_just_llm_attack(self):
 
         self.model.eval()
-        input_str = complete_input(self.model_config, self.temp_input)
+        self.input_str = complete_input(self.model_config, self.temp_input)
+
         input_ids = self.tokenizer(
-            input_str, truncation=True, return_tensors='pt'
+            self.input_str, truncation=True, return_tensors='pt'
         ).input_ids.to(self.device)
         generate_ids = self.model.generate(input_ids, max_new_tokens=96)
         self.model.train()
         self.temp_output = self.tokenizer.decode(
             generate_ids[0][input_ids.shape[-1]:], skip_special_tokens=True
         )
-        print(f'Step  : {self.temp_step}/{self.steps}\n'
-              f'Input : {self.temp_input}\n'
-              f'Output: {self.temp_output}')
-        
-        if not hasattr(self, 'log_rows'):
-            self.log_rows = []
 
-        self.print_and_write_original_attack()
+        self.log_attack_step()
 
         self.input_list.append(self.temp_input)
         self.output_list.append(self.temp_output)
@@ -260,10 +307,8 @@ class Attacker:
         self.total_hd = self.hd_last + self.hd_last_mean
         self.eval_score, self.classification, self.hallu_sm = self.mind_model.eval(self.total_hd) #pred_prob = (how conf in if hall or not --use in calc loss)
         #write to excel
-        if not hasattr(self, 'log_rows'):
-            self.log_rows = []
 
-        self.print_and_write_attack_with_mind()
+        self.log_attack_step()
 
         self.input_list.append(self.temp_input)
         self.output_list.append(self.temp_output)
@@ -627,7 +672,8 @@ class Attacker:
 
 
     def pre(self):
-        self.test()
+        #self.test()
+        self.test_just_llm_attack() 
         print('='*128,'\n')
         self.route_step_list.append(self.temp_step)
         self.route_input_list.append(self.temp_input)
@@ -667,6 +713,7 @@ class Attacker:
         while self.temp_step <= self.steps:
 
             if self.temp_output != self.target:
+                self.mind_used = False
                 print("Trying to get to Target String\n")
                 self.slice()
                 self.grad()
@@ -675,6 +722,7 @@ class Attacker:
                 self.test_just_llm_attack() 
                 self.update()
             else:
+                self.mind_used = True
                 print("Perturbed String got Target String, Attempting to get MIND target now\n")
                 self.slice()
                 self.grad()

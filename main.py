@@ -1,5 +1,6 @@
-from attacker_new_order import Attacker
+#from attacker_new_order import Attacker
 #from attacker import Attacker
+from attacker_llm_mind_targ_sep import Attacker
 from utils import random_init
 
 import argparse

@@ -95,7 +95,7 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
-        self.step_filename = "all_candidates_loss_NORM_zscore_9_25_#14.xlsx"
+        self.step_filename = "all_candidates_loss_NORM_zscore-_captFrance_9_28_#15.xlsx"
 
         self.single_llm_loss = None
         self.single_mind_loss = None
@@ -203,7 +203,7 @@ class Attacker:
         })
 
         df = pd.DataFrame([self.log_rows[-1]], columns=self.column_names)
-        self.append_table_to_excel('results_NORM_z_score_9_25_#14.xlsx', df)
+        self.append_table_to_excel('results_NORM_z_score_captFrance_9_28_#15.xlsx', df)
 
         
     def test(self):

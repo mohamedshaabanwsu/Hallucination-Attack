@@ -95,7 +95,7 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
-        self.step_filename = "all_candidates_loss_new_seperate_attack_9_26_#2.xlsx"
+        self.step_filename = "all_candidates_loss_new_seperate_attack_9_26_#3.xlsx"
 
         self.single_llm_loss = None
         self.single_mind_loss = None
@@ -255,7 +255,7 @@ class Attacker:
         
         self.log_rows.append(row)
         df = pd.DataFrame([row], columns=self.column_names)
-        self.append_table_to_excel('results_new_seperate_attack_9_26_#2.xlsx', df)
+        self.append_table_to_excel('results_new_seperate_attack_9_26_#3.xlsx', df)
 
 
     def test_just_llm_attack(self):
@@ -711,7 +711,7 @@ class Attacker:
         self.pre()
         early_stop = self.kwargs.get('early_stop', False)
         while self.temp_step <= self.steps:
-
+            
             if self.temp_output != self.target:
                 self.mind_used = False
                 print("Trying to get to Target String\n")

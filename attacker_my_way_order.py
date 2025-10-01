@@ -11,9 +11,10 @@ from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 import pandas as pd
 from openpyxl import load_workbook
 
+#TODO set seed
 class Attacker:
 
-    def __init__(self, model_name, init_input, target, device='cuda:0', steps=3000, topk=256, batch_size=1024, mini_batch_size=16, **kwargs):
+    def __init__(self, model_name, init_input, target, device='cuda:0', steps=768, topk=256, batch_size=1024, mini_batch_size=16, **kwargs):
         try:
             self.model_config = getattr(ModelConfig, model_name)#[0]
         except AttributeError:

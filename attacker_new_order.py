@@ -10,6 +10,19 @@ import numpy as np
 from openpyxl.cell.cell import ILLEGAL_CHARACTERS_RE
 import pandas as pd
 from openpyxl import load_workbook
+import random
+
+
+def set_all_seeds(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
+# Set the seed globally for reproducibility
+set_all_seeds(42) # You can replace 42 with any fixed integer
 
 class Attacker:
 
@@ -95,7 +108,7 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
-        self.step_filename = "all_candidates_loss_NORM_zscore-_captFrance_9_28_#15.xlsx"
+        self.step_filename = "all_candidates_loss_NORM_zscore_compare_10_1_#18.xlsx"
 
         self.single_llm_loss = None
         self.single_mind_loss = None
@@ -129,39 +142,42 @@ class Attacker:
         ]
 
     def append_table_to_excel(self, filename, df):
-        sheet_name='Sheet1'
+        sheet_name = 'Sheet1'
+
+        def clean_excel_string(s):
+            if isinstance(s, str):
+                return ILLEGAL_CHARACTERS_RE.sub('', s)
+            return s
+
+        # Clean all cells before writing or appending
+        df = df.applymap(clean_excel_string)
+
         if not os.path.isfile(filename):
-            # File doesn't exist: create new
+            # File doesn't exist: create new with header and clean data
             df.to_excel(filename, index=False, sheet_name=sheet_name)
         else:
-            def clean_excel_string(s):
-                if isinstance(s, str):
-                    return ILLEGAL_CHARACTERS_RE.sub('', s)
-                return s
-            df = df.map(clean_excel_string)
-        
-            # Append to existing file without direct writer.book assignment
+            # Append to existing file without erasing previous data
             with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
-                # Just write directly; no need to set writer.book or writer.sheets
-                # 'overlay' allows appending to existing sheet without erasing
                 startrow = writer.sheets[sheet_name].max_row if sheet_name in writer.sheets else 0
+                # Append data without writing header again
                 df.to_excel(writer, sheet_name=sheet_name, startrow=startrow, index=False, header=False)
-                    
+
+                        
 
     def append_df_to_excel(self, filename, df, sheet_name):
+        def clean_excel_string(s):
+            if isinstance(s, str):
+                return ILLEGAL_CHARACTERS_RE.sub('', s)
+            return s
+        # Clean all cells in DataFrame
+        df_clean = df.applymap(clean_excel_string)
+        
         if not os.path.isfile(filename):
-            # If file doesn't exist, write new file
-            df.to_excel(filename, sheet_name=sheet_name, index=False)
+            df_clean.to_excel(filename, sheet_name=sheet_name, index=False)
         else:
-
-            def clean_excel_string(s):
-                if isinstance(s, str):
-                    return ILLEGAL_CHARACTERS_RE.sub('', s)
-                return s
-            df = df.map(clean_excel_string)
-            # Otherwise, append sheet to existing file
             with pd.ExcelWriter(filename, engine='openpyxl', mode='a', if_sheet_exists="replace") as writer:
-                df.to_excel(writer, sheet_name=sheet_name, index=False)
+                df_clean.to_excel(writer, sheet_name=sheet_name, index=False)
+
                 
 
     def print_and_write_original_attack(self):
@@ -203,7 +219,7 @@ class Attacker:
         })
 
         df = pd.DataFrame([self.log_rows[-1]], columns=self.column_names)
-        self.append_table_to_excel('results_NORM_z_score_captFrance_9_28_#15.xlsx', df)
+        self.append_table_to_excel('results_NORM_zscore_compare_10_1_#18.xlsx', df)
 
         
     def test(self):

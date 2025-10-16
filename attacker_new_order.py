@@ -33,7 +33,7 @@ class Attacker:
             raise NotImplementedError
 
         self.model_name = model_name
-        self.init_input = init_input
+        self.init_input = init_input#'Which celestial laws in land solar system carries the nickname ’ recount Planet’ due tor 【ids distinct color Ones'#'Which traditionally reaction created来了 masterpiece portrait ’Mona.Equal’, now housed in the Lou molding Museum =$'#init_input
         self.target = target
         self.device = device
         self.steps = steps
@@ -108,7 +108,7 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
-        self.step_filename = "all_candidates_loss_NORM_zscore_compare_10_1_#18.xlsx"
+        self.step_filename = "all_candidates_loss_Narnia_10_5_#28.xlsx"
 
         self.single_llm_loss = None
         self.single_mind_loss = None
@@ -131,7 +131,6 @@ class Attacker:
             "Score before softmax",
             "Temp Loss",             # Current candidate loss
             "Route Loss",            # Best route loss found
-            "grad() LLM loss",       # LLM loss from grad()
             "LLM Loss that got min total",       # single_llm_loss at min combined
             "MIND Loss that got min total",      # single_mind_loss at min combined
             "LLM Loss before norm that got min total",       # single_llm_loss_before_norm at min combined
@@ -201,25 +200,24 @@ class Attacker:
             "Full Input": self.input_str,
             "Output": self.temp_output,
             "Update": self.last_update,  # to be set in update()
-            "MIND classification": label,  # already computed in your test()
+            "MIND Classification": label,  # already computed in your test()
             "Binary Class": self.classification,
             "MIND Score": self.hallu_sm,
             "Score before softmax": self.eval_score,
 
             "Temp Loss": self.temp_loss,  # make sure this is set before test() each loop
             "Route Loss": self.route_loss,
-            "grad() LLM loss": self.llm_loss,
 
-            "LLM Loss that got min total": self.single_llm_loss,
-            "MIND Loss that got min total": self.single_mind_loss,
-            "LLM Loss before norm that got min total": self.single_llm_loss_before_norm,
-            "MIND Loss before norm that got min total": self.single_mind_loss_before_norm,
-            "Min Combined Loss": self.min_loss,
+            "LLM Loss that got min total": self.single_llm_loss_before_norm,
+            "MIND Loss that got min total": self.single_mind_loss_before_norm,
+            "LLM Loss before norm that got min total": self.single_llm_loss,
+            "MIND Loss before norm that got min total": self.single_mind_loss,
+            "Min Combined Loss after norm": self.min_loss,
             "Index of Min Combined Loss": self.min_index   
         })
 
         df = pd.DataFrame([self.log_rows[-1]], columns=self.column_names)
-        self.append_table_to_excel('results_NORM_zscore_compare_10_1_#18.xlsx', df)
+        self.append_table_to_excel('results_Narnia_10_5_#28.xlsx', df)
 
         
     def test(self):
@@ -588,11 +586,11 @@ class Attacker:
                 return torch.zeros_like(tensor)  # handle edge case
             return (tensor - mean) / std
 
-        #llm_norm = min_max_normalize(self.all_llm_losses)
-        #mind_norm = min_max_normalize(self.all_mind_losses)
+        llm_norm = min_max_normalize(self.all_llm_losses)
+        mind_norm = min_max_normalize(self.all_mind_losses)
 
-        llm_norm = z_score_standardize(self.all_llm_losses)
-        mind_norm = z_score_standardize(self.all_mind_losses)
+        #llm_norm = z_score_standardize(self.all_llm_losses)
+        #mind_norm = z_score_standardize(self.all_mind_losses)
 
         #add and print values and min
         combined = llm_norm + mind_norm
@@ -609,7 +607,7 @@ class Attacker:
         
         self.single_llm_loss = self.all_llm_losses[min_index].item()
         self.single_mind_loss = self.all_mind_losses[min_index].item()
-
+            #WRONG FIX TODO
         self.single_llm_loss_before_norm = llm_norm[min_index].item()
         self.single_mind_loss_before_norm = mind_norm[min_index].item()
 
@@ -677,31 +675,29 @@ class Attacker:
         if self.model_name == 'internlm':
             self.temp_input = self.temp_input.lstrip()
 
-        
-
+    
     def update(self):
         update_strategy = self.kwargs.get('update_strategy', 'strict')
-        is_update = False
 
-        if update_strategy == 'strict':
-            if self.temp_loss < self.route_loss:
+        is_update = False
+        if update_strategy == 'strict': #IN MAIN: gaussian stragety used --why not strict? maybe better
+            if self.temp_loss<self.route_loss: #current loss must be lower than best loss
                 is_update = True
         elif update_strategy == 'gaussian':
-            gap_step = min(self.temp_step - self.route_step_list[-1], 20)
-            
-            if (self.temp_loss/self.route_loss-1)*100/gap_step <= torch.randn(1)[0].abs():
+            if not self.route_step_list:
+                gap_step = 1
+            else:
+                gap_step = self.temp_step - self.route_step_list[-1]
+                gap_step = max(min(gap_step, 20), 1)  # Never less than 1
+
+            cond = (self.temp_loss / self.route_loss - 1) * 100 / gap_step
+            if cond <= torch.randn(1)[0].abs():
                 is_update = True
 
-            '''if gap_step <= 0 or gap_step == None:
-                print(f"Warning: gap_step is {gap_step}; skipping update to avoid division by zero or negative value.")
-                is_update = False
-            else:
-                cond = (self.temp_loss / self.route_loss - 1) * 100 / gap_step
-                if cond <= torch.randn(1).abs().item():
-                    is_update = True'''
-
-        self.last_update = is_update
-        print(f'Temp Loss: {self.temp_loss}\tRoute Loss: {self.route_loss}\nUpdate:', 'True' if is_update else 'False', '\n')
+        self.last_update = is_update #added
+        print(f'Temp Loss: {self.temp_loss}\t'
+              f'Route Loss: {self.route_loss}\n'
+              f'Update:', 'True' if is_update else 'False', '\n')
 
         if is_update:
             self.route_step_list.append(self.temp_step)
@@ -710,7 +706,6 @@ class Attacker:
             self.route_loss = self.temp_loss
             self.route_loss_list.append(self.route_loss)
             self.route_output_list.append(self.temp_output)
-
 
 
     def pre(self):
@@ -776,8 +771,8 @@ class Attacker:
             self.slice()
             self.grad()
             self.sample()
-            self.forward()
-            self.test() #self.score_per_token()#
+            self.forward() #both llm + mind loss
+            self.test() 
             self.update()
             self.temp_step += 1
 

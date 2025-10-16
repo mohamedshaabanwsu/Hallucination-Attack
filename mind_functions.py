@@ -38,7 +38,6 @@ class Model(nn.Module):
         print("Score before softmax:", score.tolist())
         hallu_sm = F.softmax(score, dim=1)#[:, 1]
         print("Hallu_sm:", hallu_sm)
-        print("Score before softmax: ", score.tolist())
         #return hallu_sm[0].item()
         #commented above since i want binary val
         pred_class = torch.argmax(score, dim=1).item() #gets binary

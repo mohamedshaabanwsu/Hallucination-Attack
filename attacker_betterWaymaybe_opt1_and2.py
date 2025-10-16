@@ -108,7 +108,7 @@ class Attacker:
 
         self.all_llm_losses = None
         self.all_mind_losses = None
-        self.step_filename = "all_candidates_loss_betterWaymaybe_OPT2_minmax_10_1_#3.xlsx"
+        self.step_filename = "all_candidates_loss_betterWaymaybe_OPT2_minmax_10_4_#1_trump.xlsx"
 
         self.single_llm_loss = None
         self.single_mind_loss = None
@@ -273,7 +273,7 @@ class Attacker:
         
         self.log_rows.append(row)
         df = pd.DataFrame([row], columns=self.column_names)
-        self.append_table_to_excel('results_betterWaymaybe_OPT2_10_1_#3.xlsx', df)
+        self.append_table_to_excel('results_betterWaymaybe_OPT2_10_4_#1_trump.xlsx', df)
 
 
     def test_just_llm_attack(self):
@@ -719,19 +719,26 @@ class Attacker:
 
     def update(self):
         update_strategy = self.kwargs.get('update_strategy', 'strict')
-        is_update = False
 
-        if update_strategy == 'strict':
-            if self.temp_loss < self.route_loss:
+        is_update = False
+        if update_strategy == 'strict': #IN MAIN: gaussian stragety used --why not strict? maybe better
+            if self.temp_loss<self.route_loss: #current loss must be lower than best loss
                 is_update = True
         elif update_strategy == 'gaussian':
-            gap_step = min(self.temp_step - self.route_step_list[-1], 20)
-            
-            if (self.temp_loss/self.route_loss-1)*100/gap_step <= torch.randn(1)[0].abs():
+            if not self.route_step_list:
+                gap_step = 1
+            else:
+                gap_step = self.temp_step - self.route_step_list[-1]
+                gap_step = max(min(gap_step, 20), 1)  # Never less than 1
+
+            cond = (self.temp_loss / self.route_loss - 1) * 100 / gap_step
+            if cond <= torch.randn(1)[0].abs():
                 is_update = True
 
-        self.last_update = is_update
-        print(f'Temp Loss: {self.temp_loss}\tRoute Loss: {self.route_loss}\nUpdate:', 'True' if is_update else 'False', '\n')
+        self.last_update = is_update #added
+        print(f'Temp Loss: {self.temp_loss}\t'
+              f'Route Loss: {self.route_loss}\n'
+              f'Update:', 'True' if is_update else 'False', '\n')
 
         if is_update:
             self.route_step_list.append(self.temp_step)
@@ -740,6 +747,7 @@ class Attacker:
             self.route_loss = self.temp_loss
             self.route_loss_list.append(self.route_loss)
             self.route_output_list.append(self.temp_output)
+
 
 
     def pre(self):

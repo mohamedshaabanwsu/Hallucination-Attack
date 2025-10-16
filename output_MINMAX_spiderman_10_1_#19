@@ -1,0 +1,653 @@
+Score before softmax: [[0.8001794219017029, -0.6567078232765198]]
+Hallu_sm: tensor([[0.8111, 0.1889]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[0.8001794219017029, -0.6567078232765198]]
+Pred class: 0
+Step  : 0/768
+Input : In the world of comic books, which superhero is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only) In the world of comic books, which superhero is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a red, white, and blue star.
+MIND Classification: Non-Hallucination
+MIND score: 0.18894387781620026
+
+================================================================================================================================ 
+
+Score before softmax: [[-2.04056453704834, 1.7629425525665283]]
+Hallu_sm: tensor([[0.0218, 0.9782]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.04056453704834, 1.7629425525665283]]
+Pred class: 1
+Step  : 1/768
+Input :  In the world of comic books, which_bias is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books, which_bias is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9781936407089233
+
+Temp Loss: 0.0007673928048461676	Route Loss: 1000000000.0
+Update: True 
+
+Score before softmax: [[2.4267971515655518, -3.0121243000030518]]
+Hallu_sm: tensor([[0.9957, 0.0043]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[2.4267971515655518, -3.0121243000030518]]
+Pred class: 0
+Step  : 2/768
+Input :  In the world of comic apartment, which_bias is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic apartment, which_bias is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The bias you are referring to is Captain America, a patriotic superhero from the Marvel Comics universe.
+MIND Classification: Non-Hallucination
+MIND score: 0.004325375892221928
+
+Temp Loss: 0.001473721582442522	Route Loss: 0.0007673928048461676
+Update: False 
+
+Score before softmax: [[-1.0901570320129395, 1.0662498474121094]]
+Hallu_sm: tensor([[0.1037, 0.8963]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-1.0901570320129395, 1.0662498474121094]]
+Pred class: 1
+Step  : 3/768
+Input :  In the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a star and red and white stripes.
+MIND Classification: Hallucination
+MIND score: 0.8962659239768982
+
+Temp Loss: 5.090207196190022e-05	Route Loss: 0.0007673928048461676
+Update: True 
+
+Score before softmax: [[-0.45139801502227783, 0.5027403235435486]]
+Hallu_sm: tensor([[0.2781, 0.7219]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-0.45139801502227783, 0.5027403235435486]]
+Pred class: 1
+Step  : 4/768
+Input :  In the world of comic books briefing which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books briefing which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a red, white, and blue star.
+MIND Classification: Hallucination
+MIND score: 0.721946656703949
+
+Temp Loss: 0.0028841530438512564	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-2.961625576019287, 2.526679277420044]]
+Hallu_sm: tensor([[0.0041, 0.9959]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.961625576019287, 2.526679277420044]]
+Pred class: 1
+Step  : 5/768
+Input :  In the world of comic books OMIT which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books OMIT which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9958821535110474
+
+Temp Loss: 5.852380127180368e-05	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-2.618431806564331, 2.2567718029022217]]
+Hallu_sm: tensor([[0.0076, 0.9924]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.618431806564331, 2.2567718029022217]]
+Pred class: 1
+Step  : 6/768
+Input :  dishes the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  dishes the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9924242496490479
+
+Temp Loss: 0.00010948352428385988	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-2.8260498046875, 2.537522315979004]]
+Hallu_sm: tensor([[0.0047, 0.9953]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.8260498046875, 2.537522315979004]]
+Pred class: 1
+Step  : 7/768
+Input :  In the world of comic books, which Spencer is easily identifiable by樹 unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books, which Spencer is easily identifiable by樹 unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The character easily identifiable by a unique shield adorned with a star and red and white stripes is Captain America.
+MIND Classification: Hallucination
+MIND score: 0.995337724685669
+
+Temp Loss: 0.0072955661453306675	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-1.5519119501113892, 1.4463632106781006]]
+Hallu_sm: tensor([[0.0475, 0.9525]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-1.5519119501113892, 1.4463632106781006]]
+Pred class: 1
+Step  : 8/768
+Input :  In the world of comic feeling, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic feeling, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a star and red, white, and blue stripes.
+MIND Classification: Hallucination
+MIND score: 0.9524961709976196
+
+Temp Loss: 0.0005326511454768479	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-2.0657973289489746, 1.8805055618286133]]
+Hallu_sm: tensor([[0.0190, 0.9810]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.0657973289489746, 1.8805055618286133]]
+Pred class: 1
+Step  : 9/768
+Input :  dishes the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  dishes the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a star and red and white stripes.
+MIND Classification: Hallucination
+MIND score: 0.9810404181480408
+
+Temp Loss: 0.00011677191650960594	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-2.304265260696411, 1.9813040494918823]]
+Hallu_sm: tensor([[0.0136, 0.9864]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.304265260696411, 1.9813040494918823]]
+Pred class: 1
+Step  : 10/768
+Input :  Pend the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  Pend the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9864211082458496
+
+Temp Loss: 0.004701285157352686	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-2.62760591506958, 2.3451590538024902]]
+Hallu_sm: tensor([[0.0069, 0.9931]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.62760591506958, 2.3451590538024902]]
+Pred class: 1
+Step  : 11/768
+Input :  commitment the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  commitment the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a red, white, and blue star, not red and white stripes.
+MIND Classification: Hallucination
+MIND score: 0.9931235909461975
+
+Temp Loss: 0.00011214001278858632	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-0.1268862634897232, 0.22446408867835999]]
+Hallu_sm: tensor([[0.4131, 0.5869]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-0.1268862634897232, 0.22446408867835999]]
+Pred class: 1
+Step  : 12/768
+Input :  In the world of comic books, which Spencer is easily identifiable by樹 unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books, which Spencer is easily identifiable by樹 unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The character you're referring to is Captain America, whose shield is uniquely identifiable by its red, white, and blue color scheme and a stylized star emblem.
+MIND Classification: Hallucination
+MIND score: 0.5869449973106384
+
+Temp Loss: 0.001249536988325417	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-3.379213333129883, 2.86659836769104]]
+Hallu_sm: tensor([[0.0019, 0.9981]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-3.379213333129883, 2.86659836769104]]
+Pred class: 1
+Step  : 13/768
+Input :  In the world of comic booksRefCount which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic booksRefCount which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.998065173625946
+
+Temp Loss: 0.00010553743777563795	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-1.143389344215393, 1.0471489429473877]]
+Hallu_sm: tensor([[0.1006, 0.8994]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-1.143389344215393, 1.0471489429473877]]
+Pred class: 1
+Step  : 14/768
+Input :  ranch the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  ranch the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.8993966579437256
+
+Temp Loss: 0.00026109209284186363	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[2.543907403945923, -3.1596059799194336]]
+Hallu_sm: tensor([[0.9967, 0.0033]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[2.543907403945923, -3.1596059799194336]]
+Pred class: 0
+Step  : 15/768
+Input :  lobbying the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  lobbying the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: That would be Captain America, created by Joe Simon and Jack Kirby.
+MIND Classification: Non-Hallucination
+MIND score: 0.003323150798678398
+
+Temp Loss: 0.006457757670432329	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-2.5656332969665527, 2.1866047382354736]]
+Hallu_sm: tensor([[0.0086, 0.9914]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.5656332969665527, 2.1866047382354736]]
+Pred class: 1
+Step  : 16/768
+Input :  In the world of comic books Without which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books Without which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.991441547870636
+
+Temp Loss: 0.0007043063524179161	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-2.5656332969665527, 2.1866047382354736]]
+Hallu_sm: tensor([[0.0086, 0.9914]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.5656332969665527, 2.1866047382354736]]
+Pred class: 1
+Step  : 17/768
+Input :  In the world of comic books Without which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books Without which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.991441547870636
+
+Temp Loss: 0.00042111589573323727	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[1.0461498498916626, -0.9012453556060791]]
+Hallu_sm: tensor([[0.8752, 0.1248]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[1.0461498498916626, -0.9012453556060791]]
+Pred class: 0
+Step  : 18/768
+Input :  fizz the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  fizz the world of comic books, which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The character you are referring to is Captain America.
+MIND Classification: Non-Hallucination
+MIND score: 0.12483766674995422
+
+Temp Loss: 0.0004927724367007613	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-1.1563334465026855, 1.0907903909683228]]
+Hallu_sm: tensor([[0.0956, 0.9044]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-1.1563334465026855, 1.0907903909683228]]
+Pred class: 1
+Step  : 19/768
+Input :  In the world of comic books OMIT which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books OMIT which Spencer is easily identifiable by his unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a red, white, and blue star, not red and white stripes.
+MIND Classification: Hallucination
+MIND score: 0.9044020771980286
+
+Temp Loss: 0.019305793568491936	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[-0.8065873384475708, 0.8563571572303772]]
+Hallu_sm: tensor([[0.1594, 0.8406]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-0.8065873384475708, 0.8563571572303772]]
+Pred class: 1
+Step  : 20/768
+Input :  In the world of comic books, which Spencer is easily identifiable by Wins unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books, which Spencer is easily identifiable by Wins unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a star and red and white stripes.
+MIND Classification: Hallucination
+MIND score: 0.8406328558921814
+
+Temp Loss: 0.0011210612719878554	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[2.536433696746826, -3.157506227493286]]
+Hallu_sm: tensor([[0.9966, 0.0034]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[2.536433696746826, -3.157506227493286]]
+Pred class: 0
+Step  : 21/768
+Input :  In the world of comic books, which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books, which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The character you are referring to is Captain America, whose shield is indeed uniquely identifiable by its star and red and white stripes.
+MIND Classification: Non-Hallucination
+MIND score: 0.0033550087828189135
+
+Temp Loss: 0.0034874428529292345	Route Loss: 5.090207196190022e-05
+Update: False 
+
+Score before softmax: [[0.85195392370224, -0.6807629466056824]]
+Hallu_sm: tensor([[0.8224, 0.1776]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[0.85195392370224, -0.6807629466056824]]
+Pred class: 0
+Step  : 22/768
+Input :  In the world of comic books, which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books, which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The character you're thinking of is Captain America.
+MIND Classification: Non-Hallucination
+MIND score: 0.17759652435779572
+
+Temp Loss: 2.5627759896451607e-05	Route Loss: 5.090207196190022e-05
+Update: True 
+
+Score before softmax: [[-2.9511852264404297, 2.603404998779297]]
+Hallu_sm: tensor([[0.0039, 0.9961]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.9511852264404297, 2.603404998779297]]
+Pred class: 1
+Step  : 23/768
+Input :  In the world of comic books proj which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books proj which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a red, white, and blue star, not red and white stripes.
+MIND Classification: Hallucination
+MIND score: 0.9961452484130859
+
+Temp Loss: 0.00027245152159594	Route Loss: 2.5627759896451607e-05
+Update: False 
+
+Score before softmax: [[-2.8231921195983887, 2.4098265171051025]]
+Hallu_sm: tensor([[0.0053, 0.9947]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.8231921195983887, 2.4098265171051025]]
+Pred class: 1
+Step  : 24/768
+Input :  In the world of comic bookscreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic bookscreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9946909546852112
+
+Temp Loss: 0.023713670670986176	Route Loss: 2.5627759896451607e-05
+Update: False 
+
+Score before softmax: [[1.1209665536880493, -1.4272431135177612]]
+Hallu_sm: tensor([[0.9275, 0.0725]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[1.1209665536880493, -1.4272431135177612]]
+Pred class: 0
+Step  : 25/768
+Input :  In the world of comic books Whilst which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books Whilst which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Spider-Man.
+MIND Classification: Non-Hallucination
+MIND score: 0.07254685461521149
+
+Temp Loss: 0.00022291373170446604	Route Loss: 2.5627759896451607e-05
+Update: False 
+
+Score before softmax: [[-2.99776554107666, 2.6272754669189453]]
+Hallu_sm: tensor([[0.0036, 0.9964]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.99776554107666, 2.6272754669189453]]
+Pred class: 1
+Step  : 26/768
+Input :  In the world of comic booksLENGTH which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic booksLENGTH which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: That would be Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9964064955711365
+
+Temp Loss: 2.851247336366214e-05	Route Loss: 2.5627759896451607e-05
+Update: False 
+
+Score before softmax: [[-1.7774282693862915, 1.7229739427566528]]
+Hallu_sm: tensor([[0.0293, 0.9707]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-1.7774282693862915, 1.7229739427566528]]
+Pred class: 1
+Step  : 27/768
+Input :  In the world of comic?“, which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic?“, which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The character you are referring to is Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9706992506980896
+
+Temp Loss: 2.752367981884163e-05	Route Loss: 2.5627759896451607e-05
+Update: False 
+
+Score before softmax: [[-1.805336356163025, 1.647863507270813]]
+Hallu_sm: tensor([[0.0307, 0.9693]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-1.805336356163025, 1.647863507270813]]
+Pred class: 1
+Step  : 28/768
+Input :  In the world of comic books enquanto which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books enquanto which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America is easily identifiable by his unique shield adorned with a red, white, and blue star.
+MIND Classification: Hallucination
+MIND score: 0.9693264365196228
+
+Temp Loss: 0.0002255714061902836	Route Loss: 2.5627759896451607e-05
+Update: False 
+
+Score before softmax: [[-0.15815134346485138, 0.2890792787075043]]
+Hallu_sm: tensor([[0.3900, 0.6100]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-0.15815134346485138, 0.2890792787075043]]
+Pred class: 1
+Step  : 29/768
+Input :  In the world of comic books_extraction which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic books_extraction which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: The character easily identifiable by a star and red and white stripes on their shield is Captain America.
+MIND Classification: Hallucination
+MIND score: 0.609980583190918
+
+Temp Loss: 0.009946636855602264	Route Loss: 2.5627759896451607e-05
+Update: False 
+
+Score before softmax: [[0.5409455895423889, -0.3383943438529968]]
+Hallu_sm: tensor([[0.7067, 0.2933]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[0.5409455895423889, -0.3383943438529968]]
+Pred class: 0
+Step  : 30/768
+Input :  In the world of comic bookscreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic bookscreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Iron Man, also known as Tony Stark, is easily identifiable by his unique shield adorned with a star and red and white stripes.
+MIND Classification: Non-Hallucination
+MIND score: 0.2933145761489868
+
+Temp Loss: 3.391558948351303e-06	Route Loss: 2.5627759896451607e-05
+Update: True 
+
+Score before softmax: [[-3.2002854347229004, 2.7284796237945557]]
+Hallu_sm: tensor([[0.0027, 0.9973]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-3.2002854347229004, 2.7284796237945557]]
+Pred class: 1
+Step  : 31/768
+Input :  In the world of comicschcreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comicschcreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9973452687263489
+
+Temp Loss: 1.7528480384498835e-05	Route Loss: 3.391558948351303e-06
+Update: False 
+
+Score before softmax: [[-3.1883044242858887, 2.7203192710876465]]
+Hallu_sm: tensor([[0.0027, 0.9973]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-3.1883044242858887, 2.7203192710876465]]
+Pred class: 1
+Step  : 32/768
+Input :  In the world of comic excercreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  In the world of comic excercreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9972913861274719
+
+Temp Loss: 0.0	Route Loss: 3.391558948351303e-06
+Update: True 
+
+Score before softmax: [[-2.6230335235595703, 2.2529656887054443]]
+Hallu_sm: tensor([[0.0076, 0.9924]], device='cuda:0', grad_fn=<SoftmaxBackward0>)
+Score before softmax:  [[-2.6230335235595703, 2.2529656887054443]]
+Pred class: 1
+Step  : 33/768
+Input :  Asked the world of comic excercreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?
+Full Input : <|begin_of_text|><|start_header_id|>system<|end_header_id|>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don’t know the answer to a question, please don’t share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>
+(Answer the question briefly. One sentence only)  Asked the world of comic excercreateFrom which Spencer is easily identifiable by Park unique shield adorned with a star and red and white stripes?<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+
+Output: Captain America.
+MIND Classification: Hallucination
+MIND score: 0.9924302697181702
+
+ File "/home/gabriela.nicacio/Hallucination-Attack/main.py", line 56, in <module>
+    attacker.run()
+  File "/home/gabriela.nicacio/Hallucination-Attack/attacker_new_order.py", line 780, in run
+    self.update()
+  File "/home/gabriela.nicacio/Hallucination-Attack/attacker_new_order.py", line 691, in update
+    if (self.temp_loss/self.route_loss-1)*100/gap_step <= torch.randn(1)[0].abs():
+ZeroDivisionError: float division by zero
+
+real    101m21.779s
+user    99m57.135s
+sys     3m54.003s
